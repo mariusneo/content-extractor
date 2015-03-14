@@ -2,9 +2,9 @@ package com.linkresearchtools.jobapplication.service;
 
 import com.google.gson.Gson;
 import com.linkresearchtools.jobapplication.contract.Article;
-import com.linkresearchtools.jobapplication.contract.social.FacebookSharesCount;
 import com.linkresearchtools.jobapplication.contract.SocialShareCount;
 import com.linkresearchtools.jobapplication.contract.SocialSite;
+import com.linkresearchtools.jobapplication.contract.social.FacebookSharesCount;
 import com.linkresearchtools.jobapplication.contract.social.TwitterSharesCount;
 import com.linkresearchtools.jobapplication.domain.ArticleSiteTemplate;
 import com.linkresearchtools.jobapplication.domain.ArticleSiteTemplateRepository;
@@ -66,6 +66,14 @@ public class ArticleInformationExtractionService {
     public ArticleInformationExtractionService() {
     }
 
+    /**
+     * Extracts structured information from the specified URL.
+     * The service is stateless reason why this method can be safely called in a multi-threaded environment.
+     *
+     * @param url the article website URL
+     * @return the structured information about the article extracted from the article website.
+     * @throws ArticleInformationExtractionException
+     */
     public Article extractArticleInformation(String url) throws ArticleInformationExtractionException {
         Document doc;
         try {
@@ -88,10 +96,11 @@ public class ArticleInformationExtractionService {
         String content = getContentText(doc, articleSiteTemplate.getContentSelectors());
         String author = getAuthorText(doc, articleSiteTemplate.getAuthorSelector());
         String publishDateText = getPublishDateText(doc, articleSiteTemplate.getPublishDateSelector());
-        Date publishDate;
+        Date publishDate = null;
         try {
             SimpleDateFormat publishDateFormat = articleSiteTemplate.getPublishDateFormat();
-            publishDate = publishDateFormat.parse(publishDateText);
+            if (publishDateFormat != null)
+                publishDate = publishDateFormat.parse(publishDateText);
         } catch (ParseException e) {
             throw new ArticleInformationExtractionException("The publish date '" + publishDateText +
                     "' of the web article " + url +

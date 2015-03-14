@@ -39,7 +39,8 @@ public class ArticleSiteTemplateRepository {
     private static void init() {
         ArticleSiteTemplate spiegelDeSiteTemplate = new ArticleSiteTemplate();
         regexUrl2SiteTemplateMap.put(
-                "http://www\\.spiegel\\.de/wissenschaft/technik/[a-z\\-\\d]*\\.html", spiegelDeSiteTemplate);
+                "http:\\/\\/www\\.spiegel\\.de\\/([a-zA-Z\\d\\-]+\\/)+[a-zA-Z\\d\\-]*\\.html",
+                spiegelDeSiteTemplate);
         spiegelDeSiteTemplate.setTitleSelector("#content-main .article-title span");
         spiegelDeSiteTemplate.addContentSelector("#content-main .article-intro strong");
         List<String> spiegelDeIgnoredArticleSectionSelectors = new ArrayList<>();
@@ -60,7 +61,7 @@ public class ArticleSiteTemplateRepository {
         seoDeSiteTemplate.setPublishDateSelector("#contentleft .postarea .dateleft .time");
         // seo.de publish date example : Dezember 19, 2014
         seoDeSiteTemplate.setPublishDateFormat(new SimpleDateFormat("MMMMM dd, yyyy", Locale.GERMAN));
-        regexUrl2SiteTemplateMap.put("http://seo\\.de/[\\d]+/[a-z\\-]*/?", seoDeSiteTemplate);
+        regexUrl2SiteTemplateMap.put("http:\\/\\/seo\\.de\\/[\\d]+\\/[a-zA-Z\\d\\-]*\\/?", seoDeSiteTemplate);
 
         ArticleSiteTemplate youtubeSiteTemplate = new ArticleSiteTemplate();
         youtubeSiteTemplate.setTitleSelector("#eow-title");
@@ -72,7 +73,8 @@ public class ArticleSiteTemplateRepository {
 //                "(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec))" +
 //                "(?<day>\\s(?:[1-9]|[12][0-9]|3[01])),(?<year>\\s(?:19|20)\\d\\d))";
         youtubeSiteTemplate.setPublishDateFormat(new SimpleDateFormat("'Uploaded on' MMM dd, yyyy", Locale.US));
-        regexUrl2SiteTemplateMap.put("(http|https)://www\\.youtube\\.com/watch\\?v=[a-zA-Z\\d]*", youtubeSiteTemplate);
+        regexUrl2SiteTemplateMap.put("(http|https):\\/\\/www\\.youtube\\.com\\/watch\\?v=[a-zA-Z\\d\\-]*\\/?",
+                youtubeSiteTemplate);
 
         regexUrls.addAll(regexUrl2SiteTemplateMap.keySet());
     }

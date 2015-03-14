@@ -6,6 +6,11 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * This class contains the templates used for extracting article specific information.
+ * Most of the fields of the class are CSS selectors used for extracting relevant structured information from the DOM
+ * tree of the article web pages.
+ */
 public class ArticleSiteTemplate {
     private String titleSelector;
 
@@ -52,6 +57,10 @@ public class ArticleSiteTemplate {
 
     public Map<String, List<String>> getContentSelectors() {
         return Collections.unmodifiableMap(contentSelectors);
+    }
+
+    public void clearContentSelectors() {
+        contentSelectors.clear();
     }
 
     public String getAuthorSelector() {

@@ -88,8 +88,8 @@ public class Application {
                 } catch (IOException e) {
                     System.err.println("Serialization to JSON of the output for the article website " + url +
                             " failed. Reason : " + e.getMessage());
-                } finally{
-                    if (cmd.hasOption(OUTPUT_FILE_PARAM)){
+                } finally {
+                    if (cmd.hasOption(OUTPUT_FILE_PARAM)) {
                         out.close();
                     }
                 }

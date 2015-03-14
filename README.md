@@ -24,6 +24,34 @@ Please try to extract that information for the following pages:
 - http://seo.de/8963/seo-der-soeldner-sinniert-ueber-die-welt-von-heute/
 - http://bit.ly/1C1rR8N
 
+## General description of the solution
+The purpose of the application is to extract structured data out of one or more specified webpage by their URL.
+
+The application uses a site template repository where the structure (CSS selectors for the elements containing the
+title, author, content and publishing date) of each the article site to be retrieved is stored.
+
+### Limitations of this approach
+
+The downside of using this manual approach for extracting the structured data is that when one of the sites for which
+the structure is stored in the repository changes its structure, the extraction will not work anymore until it will be
+manually adjusted.
+
+Take the news portal spiegel.de for example. The website articles
+
+- http://www.spiegel.de/wissenschaft/technik/solar-impulse-2-solarflugzeug-startet-erdumrundung-a-1022458.html
+- http://www.spiegel.de/wissenschaft/natur/co2-reduzierung-bundeskabinett-beschliesst-klimapaket-a-1006371.html
+- http://www.spiegel.de/kultur/musik/pharrell-williams-robin-thicke-blurred-lines-ist-plagiat-a-1022867.html
+
+follow the expected format for retrieving structured data about the article. On the other hand, the website article
+
+- http://www.spiegel.de/wissenschaft/technik/teilchenbeschleuniger-lhc-am-cern-startet-wieder-a-1021822.html
+
+does not follow anymore the expected structure and a new template would need to be manually calibrated to fit this
+specific web template.
+
+
+
+
 ## Setup of the project
 
 This guideline assumes that Java 8 and Maven 3 are installed on your machine.
